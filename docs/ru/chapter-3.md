@@ -96,19 +96,20 @@ zig build-exe .\tiny-hello.zig -O ReleaseSmall -fstrip -fsingle-threaded -target
 ```zig
 const std = @import("std");
 
-// Although this function looks imperative, note that its job is to
-// declaratively construct a build graph that will be executed by an external
-// runner.
+// Несмотря на то, что эта функция выглядит императивной, имейте в виду, что её задача
+// декларативно сконструировать граф сборки, который будет использован внешним сборщиком
 pub fn build(b: *std.Build) void {
-    // Standard target options allows the person running `zig build` to choose
-    // what target to build for. Here we do not override the defaults, which
-    // means any target is allowed, and the default is native. Other options
-    // for restricting supported target set are available.
+    // Функция предосталяют для команды `zig build` возможность выбрать целевую платформу
+    // для сборки. Сейчас мы не перезаписывает значения по умолчанию, это означает,
+    // что разрешается использование любой целевой платформы, и по умолчанию это нативная
+    // (та, на которой выполняется команда). При этом доступны другие опции для ограничения
+    // поддерживаемых целевых платформ.
     const target = b.standardTargetOptions(.{});
 
-    // Standard optimization options allow the person running `zig build` to select
-    // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
-    // set a preferred release mode, allowing the user to decide how to optimize.
+    // Функция предоставляет для команды `zig build` возможность выбрать между
+    // режимами Debug, ReleaseSafe, ReleaseFast, или ReleaseSmall. Сейчас мы
+    // не устанавливаем режим сборки, предоставляя пользователю возможность самому
+    // выбрать необходимые оптимизации.
     const optimize = b.standardOptimizeOption(.{});
 
     const exe = b.addExecutable(.{
